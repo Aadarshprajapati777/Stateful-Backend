@@ -9,8 +9,20 @@ interface Game{
 
 export class GameManager{
     games:Game[]=[];
-    constructor(){
+    private constructor(){
         this.games=[];
+    }
+    private static instance:GameManager;
+
+    
+
+    static getInstance(){
+        if(GameManager.instance){
+            return GameManager.instance;
+        }
+        GameManager.instance=new GameManager();
+        return GameManager.instance;
+
     }
     addMove(gameId:string, move:string){
         console.log("Adding move to game", gameId);
@@ -33,4 +45,4 @@ export class GameManager{
     }
 }
 
-export const gameManager= new GameManager();
+export const gameManager=GameManager.getInstance();

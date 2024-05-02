@@ -6,6 +6,13 @@ class GameManager {
         this.games = [];
         this.games = [];
     }
+    static getInstance() {
+        if (GameManager.instance) {
+            return GameManager.instance;
+        }
+        GameManager.instance = new GameManager();
+        return GameManager.instance;
+    }
     addMove(gameId, move) {
         console.log("Adding move to game", gameId);
         const game = this.games.find(game => game.id === gameId);
@@ -25,4 +32,4 @@ class GameManager {
     }
 }
 exports.GameManager = GameManager;
-exports.gameManager = new GameManager();
+exports.gameManager = GameManager.getInstance();
